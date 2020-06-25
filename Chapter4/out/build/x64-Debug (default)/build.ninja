@@ -99,6 +99,13 @@ build Chapter4\CMakeFiles\Chapter4.dir\grade.cpp.obj: CXX_COMPILER__Chapter4_Deb
   TARGET_COMPILE_PDB = Chapter4\CMakeFiles\Chapter4.dir\
   TARGET_PDB = Chapter4\Chapter4.pdb
 
+build Chapter4\CMakeFiles\Chapter4.dir\ch4_2.cpp.obj: CXX_COMPILER__Chapter4_Debug ..\..\..\Chapter4\ch4_2.cpp || cmake_object_order_depends_target_Chapter4_Debug
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = Chapter4\CMakeFiles\Chapter4.dir
+  OBJECT_FILE_DIR = Chapter4\CMakeFiles\Chapter4.dir
+  TARGET_COMPILE_PDB = Chapter4\CMakeFiles\Chapter4.dir\
+  TARGET_PDB = Chapter4\Chapter4.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Chapter4
@@ -107,7 +114,7 @@ build Chapter4\CMakeFiles\Chapter4.dir\grade.cpp.obj: CXX_COMPILER__Chapter4_Deb
 #############################################
 # Link the executable Chapter4\Chapter4.exe
 
-build Chapter4\Chapter4.exe: CXX_EXECUTABLE_LINKER__Chapter4_Debug Chapter4\CMakeFiles\Chapter4.dir\Chapter4.cpp.obj Chapter4\CMakeFiles\Chapter4.dir\median.cpp.obj Chapter4\CMakeFiles\Chapter4.dir\Student_info.cpp.obj Chapter4\CMakeFiles\Chapter4.dir\grade.cpp.obj
+build Chapter4\Chapter4.exe: CXX_EXECUTABLE_LINKER__Chapter4_Debug Chapter4\CMakeFiles\Chapter4.dir\Chapter4.cpp.obj Chapter4\CMakeFiles\Chapter4.dir\median.cpp.obj Chapter4\CMakeFiles\Chapter4.dir\Student_info.cpp.obj Chapter4\CMakeFiles\Chapter4.dir\grade.cpp.obj Chapter4\CMakeFiles\Chapter4.dir\ch4_2.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
