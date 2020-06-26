@@ -1,0 +1,5 @@
+C:/Users/Andrew/source/repos/Accelerated C++/Chapter5/Chapter5/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
+C:/Users/Andrew/source/repos/Accelerated C++/Chapter5/Chapter5/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir
+C:/Users/Andrew/source/repos/Accelerated C++/Chapter5/Chapter5/out/build/x64-Debug (default)/Chapter5/CMakeFiles/rebuild_cache.dir
+C:/Users/Andrew/source/repos/Accelerated C++/Chapter5/Chapter5/out/build/x64-Debug (default)/Chapter5/CMakeFiles/Chapter5.dir
+C:/Users/Andrew/source/repos/Accelerated C++/Chapter5/Chapter5/out/build/x64-Debug (default)/Chapter5/CMakeFiles/edit_cache.dir
