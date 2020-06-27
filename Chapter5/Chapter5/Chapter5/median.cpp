@@ -10,5 +10,5 @@ double median(vector<double> vec) {
 	}
 	sort(vec.begin(), vec.end());
 	vector<double>::size_type mid = vec.size() / 2;
-	return vec.size() % 2 == 0 ? (vec[mid] + vec[mid + 1]) / 2 : vec[mid];
+	return vec.size() % 2 == 0 ? (vec[mid] + vec[mid - 1]) / 2 : vec[mid];
 }
