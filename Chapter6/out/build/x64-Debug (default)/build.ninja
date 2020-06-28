@@ -127,6 +127,13 @@ build Chapter6\CMakeFiles\Chapter6.dir\analysis.cpp.obj: CXX_COMPILER__Chapter6_
   TARGET_COMPILE_PDB = Chapter6\CMakeFiles\Chapter6.dir\
   TARGET_PDB = Chapter6\Chapter6.pdb
 
+build Chapter6\CMakeFiles\Chapter6.dir\ch6_6.cpp.obj: CXX_COMPILER__Chapter6_Debug ..\..\..\Chapter6\ch6_6.cpp || cmake_object_order_depends_target_Chapter6_Debug
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = Chapter6\CMakeFiles\Chapter6.dir
+  OBJECT_FILE_DIR = Chapter6\CMakeFiles\Chapter6.dir
+  TARGET_COMPILE_PDB = Chapter6\CMakeFiles\Chapter6.dir\
+  TARGET_PDB = Chapter6\Chapter6.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Chapter6
@@ -135,7 +142,7 @@ build Chapter6\CMakeFiles\Chapter6.dir\analysis.cpp.obj: CXX_COMPILER__Chapter6_
 #############################################
 # Link the executable Chapter6\Chapter6.exe
 
-build Chapter6\Chapter6.exe: CXX_EXECUTABLE_LINKER__Chapter6_Debug Chapter6\CMakeFiles\Chapter6.dir\Chapter6.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\ch5_2.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\read.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\median.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\grade.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\ch6_0.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\average.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\analysis.cpp.obj
+build Chapter6\Chapter6.exe: CXX_EXECUTABLE_LINKER__Chapter6_Debug Chapter6\CMakeFiles\Chapter6.dir\Chapter6.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\ch5_2.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\read.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\median.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\grade.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\ch6_0.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\average.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\analysis.cpp.obj Chapter6\CMakeFiles\Chapter6.dir\ch6_6.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

@@ -4,11 +4,12 @@
 #include "Chapter6.h"
 #include "ch5_2.h"
 #include "ch6_0.h"
+#include "ch6_6.h"
 
 using namespace std;
 
 int main()
 {
-	ch6_0();
+	ch6_6();
 	return 0;
 }
