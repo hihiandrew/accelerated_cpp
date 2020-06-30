@@ -1,0 +1,3 @@
+C:/Users/Andrew/source/repos/Accelerated C++/CMakeFiles/ALL_BUILD.dir
+C:/Users/Andrew/source/repos/Accelerated C++/CMakeFiles/ZERO_CHECK.dir
+C:/Users/Andrew/source/repos/Accelerated C++/Chapter7/CMakeFiles/Chapter7.dir
