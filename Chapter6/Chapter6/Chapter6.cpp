@@ -11,6 +11,6 @@ using namespace std;
 
 int main()
 {
-	ch6_7();
+	ch6_6();
 	return 0;
 }

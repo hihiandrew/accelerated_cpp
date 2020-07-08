@@ -120,6 +120,13 @@ build Chapter7\CMakeFiles\Chapter7.dir\nrand.cpp.obj: CXX_COMPILER__Chapter7_Deb
   TARGET_COMPILE_PDB = Chapter7\CMakeFiles\Chapter7.dir\
   TARGET_PDB = Chapter7\Chapter7.pdb
 
+build Chapter7\CMakeFiles\Chapter7.dir\xref.cpp.obj: CXX_COMPILER__Chapter7_Debug ..\..\..\Chapter7\xref.cpp || cmake_object_order_depends_target_Chapter7_Debug
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = Chapter7\CMakeFiles\Chapter7.dir
+  OBJECT_FILE_DIR = Chapter7\CMakeFiles\Chapter7.dir
+  TARGET_COMPILE_PDB = Chapter7\CMakeFiles\Chapter7.dir\
+  TARGET_PDB = Chapter7\Chapter7.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Chapter7
@@ -128,7 +135,7 @@ build Chapter7\CMakeFiles\Chapter7.dir\nrand.cpp.obj: CXX_COMPILER__Chapter7_Deb
 #############################################
 # Link the executable Chapter7\Chapter7.exe
 
-build Chapter7\Chapter7.exe: CXX_EXECUTABLE_LINKER__Chapter7_Debug Chapter7\CMakeFiles\Chapter7.dir\Chapter7.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\ch7_0.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\ch7_0b.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\split.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\ch7_3.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\loaders.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\nrand.cpp.obj
+build Chapter7\Chapter7.exe: CXX_EXECUTABLE_LINKER__Chapter7_Debug Chapter7\CMakeFiles\Chapter7.dir\Chapter7.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\ch7_0.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\ch7_0b.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\split.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\ch7_3.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\loaders.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\nrand.cpp.obj Chapter7\CMakeFiles\Chapter7.dir\xref.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

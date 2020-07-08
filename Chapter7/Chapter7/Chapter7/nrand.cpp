@@ -1,6 +1,7 @@
 #include <stdexcept>
+#include "loaders.h"
 
-int nrand(int size) {
+int nrand(RuleCollection::size_type size) {
 	if (size <= 0 || size > RAND_MAX) {
 		throw std::domain_error("size out of bounds");
 	}

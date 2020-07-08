@@ -25,7 +25,6 @@ Grammar load_grammar(istream& in) {
 	return g;
 }
 
-
 bool is_category(const string key) {
 	return key.size() > 1 && key[0] == '<' && key[key.size() - 1] == '>';
 }

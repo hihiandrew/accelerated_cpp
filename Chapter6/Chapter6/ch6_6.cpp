@@ -4,6 +4,8 @@
 #include "average.h"
 #include "analysis.h"
 
+#include <algorithm>
+
 using namespace std;
 
 /*
@@ -13,6 +15,8 @@ a. average marking
 b. median marking (including zeros')
 c. optimistic median marking (ignoring zeros')
 */
+
+
 
 int ch6_6() {
 
@@ -35,9 +39,9 @@ int ch6_6() {
 		return 1;
 	}
 
-	write_analysis2(cout, "Median", grade_median, did, didnt);
-	write_analysis2(cout, "Average", grade_average, did, didnt);
-	write_analysis2(cout, "Optimisic Median", grade_optimistic_median, did, didnt);
+	write_analysis3(cout, "Median", grade_median, did, didnt);
+	write_analysis3(cout, "Average", grade_average, did, didnt);
+	write_analysis3(cout, "Optimisic Median", grade_optimistic_median, did, didnt);
 
 	return 0;
 }
