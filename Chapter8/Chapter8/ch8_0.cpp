@@ -8,10 +8,11 @@ using namespace std;
 int ch8_0() {
 	std::vector<int> vec = { 4,5,6,1,2,3 };
 	int num = median(vec);
-	std::cout  << num2 << endl;
+	std::cout  << num << endl;
 
 	string s;
 	while (getline(cin, s)) {
 		split(s, ostream_iterator<string>(cout, "_"));
 	}
+	return 0;
 }
