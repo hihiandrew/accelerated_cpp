@@ -23,7 +23,7 @@ using std::domain_error;
 #include "Student_info.h"
 #include "ch9_0.h"
 
-int ch9_0(){
+int ch9_1(){
 
   vector<Student_info> students;
   Student_info record;
@@ -45,14 +45,12 @@ int ch9_0(){
   for (vector<Student_info>::size_type i=0; i!=students.size(); ++i){
     cout << students[i].name()
       << string(maxlen+1 - students[i].name().size(),' ');
-    try{
-      // double final_grade = students[i].grade();
-      double final_grade = students[i].get_grade();
+    if(students[i].valid()){
       streamsize prec = cout.precision();
-      cout << setprecision(3) << final_grade 
-        << setprecision(prec) << endl;
-    }catch(const domain_error &e){
-      cout << e.what() << endl;
+      cout << setprecision(3) << students[i].get_grade() 
+       << setprecision(prec) << endl;
+    }else{
+      cout << "No homework submitted." << endl;
     }
   }
   return 0;

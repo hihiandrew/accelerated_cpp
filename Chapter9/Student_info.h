@@ -15,14 +15,16 @@ class Student_info{
     // public member function 
     std::string name() const {return n;}
     bool valid() const {return !homework.empty();}
+    double get_grade() const {return finalgrade;}
+    void calc_grade();
     std::istream& read(std::istream&);
-    double grade() const;
   private:
     // private data members
     std::string n;
-    double midterm, finalexam;
     std::vector<double> homework;
+    double midterm, finalexam, finalgrade;
 };
+
 bool compare(const Student_info&, const Student_info&);
 
 #endif

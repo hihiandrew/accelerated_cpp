@@ -5,7 +5,6 @@
 using std::istream;
 
 #include "Student_info.h"
-
 #include "grade.h"
 #include "median.h"
 #include "read.h"
@@ -22,16 +21,18 @@ istream& Student_info::read(istream& in){
     in >> n >> midterm >> finalexam;
     read_hw(in, homework);
   }
+  
+  calc_grade(); // member function
+
   return in;
 }
 
-// scope operator '::' used to specify this is not a class member function
-double Student_info::grade() const {
-  return ::grade(midterm,finalexam,homework);
-}
 
 bool compare(const Student_info& x, const Student_info& y){
   return x.name() < y.name();
 }
 
 
+void Student_info::calc_grade() {
+  finalgrade = ::grade(midterm,finalexam,homework);
+}
