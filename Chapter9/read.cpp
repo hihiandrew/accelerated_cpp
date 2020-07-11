@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "read.h"
 
 using namespace std;
 

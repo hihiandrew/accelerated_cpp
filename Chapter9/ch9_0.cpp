@@ -21,6 +21,7 @@ using std::setprecision;
 using std::domain_error;
 
 #include "Student_info.h"
+#include "ch9_0.h"
 
 int ch9_0(){
 
@@ -49,7 +50,7 @@ int ch9_0(){
       streamsize prec = cout.precision();
       cout << setprecision(3) << final_grade 
         << setprecision(prec) << endl;
-    }catch(domain_error e){
+    }catch(const domain_error &e){
       cout << e.what() << endl;
     }
   }
