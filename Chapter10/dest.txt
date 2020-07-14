@@ -1,0 +1,8 @@
+this 
+is a line of test
+please copy me to 
+the destination text 
+file.
+
+regareds
+
