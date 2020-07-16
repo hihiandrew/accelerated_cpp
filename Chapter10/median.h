@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <algorithm>
 #include <vector>
+#include <stdexcept>
 
 // T: element type, P: pointer/iterator type of container
 template <class T, class P>
