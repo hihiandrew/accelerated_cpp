@@ -1,6 +1,7 @@
 #include "ch10_0.h"
+#include "ch10_1.h"
 
 int main(){
-  ch10_0();
+  ch10_1();
   return 0;
 }

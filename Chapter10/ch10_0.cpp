@@ -1,12 +1,15 @@
 #include <cstddef>
+
 #include <fstream>
 using std::ifstream;
 using std::ofstream;
+
 #include <iostream>
 using std::cout;
 using std::cin;
 using std::cerr;
 using std::endl;
+
 #include <string>
 using std::string;
 
