@@ -40,8 +40,9 @@ double grade(double midterm, double finalexam, double hw){
   return 0.2 * midterm + 0.4 * finalexam + 0.4 * hw;
 }
 
-double grade(double midterm, double finalexam, vector<double> hw){
-  return grade(midterm, finalexam, median(hw));
+double grade(double midterm, double finalexam, vector<double>& hw){
+  return grade(midterm, finalexam,
+      median<double,vector<double>::iterator>(hw.begin(),hw.end()));
 }
 
 void Student_info::calc_grades(double grade){
@@ -61,7 +62,7 @@ bool rank_students(Student_info& a, Student_info& b){
   if (a.grade() == b.grade()){
     return a.name() < b.name();
   }else{
-    return a.grade() > b.grade();
+    return a.grade() < b.grade();
   }
 }
 

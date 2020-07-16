@@ -22,7 +22,8 @@ class Student_info{
 };
 
 bool rank_students(Student_info&, Student_info&);
-double grade(double&, double&, double&);
-double grade(double&, double&, std::vector<double>&);
+double grade(double, double, double);
+double grade(double, double, std::vector<double>&);
 int ch10_1();
+
 #endif
