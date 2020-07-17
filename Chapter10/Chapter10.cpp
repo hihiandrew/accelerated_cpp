@@ -2,8 +2,9 @@
 #include "ch10_1.h"
 #include "ch10_2.h"
 #include "ch10_4.h"
+#include "ch10_6.h"
 
 int main(){
-  ch10_4();
+  ch10_6();
   return 0;
 }
