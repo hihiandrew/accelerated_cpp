@@ -4,8 +4,8 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include "grade.h"
-#include "read.h"
+#include <iostream>
+#include <list>
 
 class Student_info{
   public:
@@ -27,6 +27,9 @@ class Student_info{
     double get_grade() const {return finalgrade;}
     void calc_grade();
     std::istream& read(std::istream&);
+    //utility functions
+    static void reset_call_count();
+    static std::ostream& print_call_count(std::ostream&);
   private:
     // counters
     static int default_constructor_calls;
@@ -40,7 +43,12 @@ class Student_info{
     std::vector<double> homework;
     double midterm, finalexam, finalgrade;
 };
-
+std::istream& read_hw(std::istream&, std::vector<double>&);
+std::istream& read_hw(std::istream&, std::list<double>&);
+double grade(const double&, const double&, const double);
+double grade(const double&, const double&, const std::vector<double>&);
+double median(std::vector<double>);
 bool compare(const Student_info&, const Student_info&);
-
+std::vector<Student_info> extract_fails(std::vector<Student_info>&);
+std::list<Student_info> extract_fails(std::list<Student_info>&);
 #endif
