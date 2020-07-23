@@ -130,9 +130,10 @@ template <class T> typename Vec<T>::iterator Vec<T>::erase(iterator start){
   } 
   size_type res_posn = start - data;
   alloc.destroy(start);
-  if(start != avail){
-    std::uninitialized_copy(start+1,avail,start);
-    alloc.destroy(avail);
+  iterator iter = start+1;
+  while (iter != avail){
+    alloc.construct(start++,*iter++);
+    alloc.destroy(start);
   }
   --avail;
   return &data[res_posn];
@@ -145,15 +146,18 @@ template <class T> typename Vec<T>::iterator Vec<T>::erase(iterator start,iterat
   }
   // save position for return
   size_type res_posn = start - data;
-  size_type del_len = end - start;
-  // copy tail and remove residual
-  std::uninitialized_copy(end,avail,start);
-  iterator iter = end;
-  while(iter!=avail){
+  // destroy the range
+  iterator iter = start;
+  while(iter != end){
+    alloc.destroy(iter++);
+  }
+  // copy residual back 
+  while(iter != avail){
+    alloc.construct(start++,*iter);
     alloc.destroy(iter++);
   }
   // reset avail and return dummy res
-  avail -= del_len;
+  avail = start;
   return &data[res_posn];
 }
 
