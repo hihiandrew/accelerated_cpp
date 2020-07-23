@@ -4,6 +4,7 @@
 #include <memory>
 #include <algorithm>
 #include <iostream>
+#include <stdexcept>
 
 template <class T>
 class Vec{
@@ -26,16 +27,19 @@ class Vec{
     // destructor
     ~Vec(){uncreate();}
 
-    // size and index
+    // size,empty and index
     size_type size() const {return avail - data;}
     T& operator[](size_type i){return data[i];}            // read+write
     const T& operator[](size_type i)const{return data[i];} // read only
+    bool empty(){return avail-data == 0;}
 
     // functions that return iterators
     iterator begin(){return data;}
     iterator end(){return avail;}
     const_iterator begin()const{return data;}
     const_iterator end()const{return avail;}
+    iterator erase(iterator);
+    iterator erase(iterator,iterator);
 
     // dynamic vecs
     void push_back(const T& val){
@@ -118,6 +122,39 @@ template <class T> void Vec<T>::grow(){
   data = new_data;
   avail = new_avail;
   limit = data + new_size;
+}
+
+template <class T> typename Vec<T>::iterator Vec<T>::erase(iterator start){
+  if(this->empty()){
+    throw std::domain_error("Vec is empty.");
+  } 
+  size_type res_posn = start - data;
+  alloc.destroy(start);
+  if(start != avail){
+    std::uninitialized_copy(start+1,avail,start);
+    alloc.destroy(avail);
+  }
+  --avail;
+  return &data[res_posn];
+}
+
+template <class T> typename Vec<T>::iterator Vec<T>::erase(iterator start,iterator end){
+  // valid input check
+  if(this->empty()){
+    throw std::domain_error("Vec is empty.");
+  }
+  // save position for return
+  size_type res_posn = start - data;
+  size_type del_len = end - start;
+  // copy tail and remove residual
+  std::uninitialized_copy(end,avail,start);
+  iterator iter = end;
+  while(iter!=avail){
+    alloc.destroy(iter++);
+  }
+  // reset avail and return dummy res
+  avail -= del_len;
+  return &data[res_posn];
 }
 
 template <class T> void Vec<T>::unchecked_append(const T& val){

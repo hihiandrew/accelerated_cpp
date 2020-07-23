@@ -11,7 +11,7 @@ void test_calls(T& students){
   Student_info::reset_call_count();
   Student_info record;
   std::cin.clear();
-  while(record(std::cin)){
+  while(record.read(std::cin)){
     students.push_back(record);
   }
   extract_fails(students);
