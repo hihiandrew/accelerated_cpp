@@ -173,7 +173,7 @@ void Vec<T>::clear() {
   if (data) {
     iterator iter = avail;
     while (iter != data) {
-      alloc.destroy(--iter)
+      alloc.destroy(--iter);
     }
     data = avail = 0;
   }

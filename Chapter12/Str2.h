@@ -5,6 +5,7 @@
 #include <cstring>    //strlen
 #include <iostream>   //istream,ostream
 #include <iterator>   //back_inserter
+#include <memory>
 
 #include "Vec.h"
 
@@ -15,12 +16,12 @@ class Str {
 
   typedef Vec<char>::size_type size_type;
   // default constructor, empty Str
-  Str() {}
+  Str() { create(0, '\0'); }
   // Str containing copies of c
-  Str(size_type n, char c) : data(n, c) {}
+  Str(size_type n, char c) : create(n, c) {}
   // Str from null-terminated array of char
   Str(const char* cp) {
-    std::copy(cp, cp + std::strlen(cp), std::back_inserter(data));
+    create(cp, cp + std::strlen(cp), std::back_inserter(data));
   }
   // Str from range denoted by iterators
   template <class In>
@@ -37,7 +38,25 @@ class Str {
   }
 
  private:
-  Vec<char> data;
+  // memory management
+  std::allocator<char> alloc;
+  void grow();
+  void create();
+  void create(size_type, const char&);
+  void create(const char* cp);
+  template <class In>
+  void create(In b, In e) {
+    size_t length = b - e + 1;
+    data = alloc.allocate(length);
+    limit = avail = std::uninitialized_copy(b, e, data);
+    data[length - 1] = '\0';
+    ++limit, ++avail;
+  };
+  void uncreate();
+
+  char* data;
+  char* avail;
+  char* limit;
 };
 
 // non-member operators operators
