@@ -9,21 +9,21 @@ class Node {
   Node() : data(NULL), next(NULL), previous(NULL){};
   Node(T val) : next(NULL), data(val){};
 
-  Node<T> *next;
-  Node<T> *previous;
+  Node<T>* next;
+  Node<T>* previous;
   T data;
 };
 
 template <class T>
 class NodeIterator {
  public:
-  NodeIterator(Node<T> *node) : iter(node){};
+  NodeIterator(Node<T>* node) : iter(node){};
 
-  NodeIterator &operator++() {
+  NodeIterator& operator++() {
     iter = iter->next;
     return *this;
   }
-  NodeIterator &operator--() {
+  NodeIterator& operator--() {
     iter = iter->previous;
     return *this;
   }
@@ -43,11 +43,12 @@ class NodeIterator {
     iter = iter->previous;
     return clone;
   }
-  bool operator!=(NodeIterator<T> &rhs) const { return this->data != rhs.data; }
-  T &operator*() const { return this->data; }
+  //TODO: reference operator causing bug - or something else
+  bool operator!=(NodeIterator& rhs) const { return this->iter != rhs.iter; }
+  T &operator*() const { return iter->data; }
 
  private:
-  Node<T> *iter;
+  Node<T>* iter;
 };
 
 template <class T>
@@ -67,15 +68,15 @@ class LList {
 
   size_type size() const { return s; }
   iterator begin() { return iterator(head); }
-  iterator end() { return iterator(tail); }
+  iterator end() { return iterator(NULL); }
   const_iterator begin() const { return iterator(head); }
-  const_iterator end() const { return iterator(tail); }
+  const_iterator end() const { return iterator(NULL); }
 
-  void push_back(const T &t) { append(t); }
+  void push_back(const T &v) { append(v); }
 
  private:
-  Node *head;
-  Node *tail;
+  Node<T>* head;
+  Node<T>* tail;
   size_type s;
 
   std::allocator<Node<T>> alloc;
@@ -98,7 +99,7 @@ LList<T> &LList<T>::operator=(const LList &l) {
 template <class T>
 void LList<T>::create(size_type s, const T &v) {
   for (size_type i = 0; i < s; i++) {
-    append(t);
+    append(v);
   }
 }
 
@@ -111,13 +112,13 @@ void LList<T>::create(iterator b, iterator e) {
 
 template <class T>
 void LList<T>::uncreate() {
-  Node<T> *node = back;
+  Node<T> *node = tail;
   while (node != NULL) {
     Node<T> *del_node = node;
     node = node->previous;
     delete del_node;
   }
-  front = back = NULL;
+  head = tail = NULL;
   s = 0;
 }
 
@@ -125,17 +126,17 @@ template <class T>
 void LList<T>::append(const T &v) {
   Node<T> *node = new Node<T>(v);
   if (s == 0) {
-    front = node;
+    head = node;
   } else if (s == 1) {
-    node->previous = front;
-    back = node;
-    front->next = node;
+    node->previous = head;
+    tail = node;
+    head ->next = node;
   } else {
-    back->next = node;
-    node->previous = back;
-    back = node;
+    tail->next = node;
+    node->previous = tail;
+    tail = node;
   }
-  s++
+  s++;
 }
 
 #endif

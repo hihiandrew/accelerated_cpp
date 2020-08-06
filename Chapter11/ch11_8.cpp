@@ -13,4 +13,5 @@ int ch11_8() {
   while (iter != list.end()) {
     cout << *iter++ << endl;
   }
+  return 0;
 }
