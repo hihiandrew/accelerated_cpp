@@ -27,7 +27,7 @@ class Vec {
   // destructor
   ~Vec() { uncreate(); }
 
-  // size,empty,clear,index
+  // size,empty and index
   size_type size() const { return avail - data; }
   T& operator[](size_type i) { return data[i]; }              // read+write
   const T& operator[](size_type i) const { return data[i]; }  // read only
@@ -38,6 +38,8 @@ class Vec {
   iterator end() { return avail; }
   const_iterator begin() const { return data; }
   const_iterator end() const { return avail; }
+  iterator erase(iterator);
+  iterator erase(iterator, iterator);
 
   // dynamic vecs
   void push_back(const T& val) {
@@ -49,9 +51,6 @@ class Vec {
 
   // helper funcitons
   std::ostream& print_vec(std::ostream&);
-  void clear() { destroy(); }
-  iterator erase(iterator iter) { return destroy(iter); };
-  iterator erase(iterator b, iterator e) { return destroy(b, e); };
 
  private:
   iterator data;   // first elem in vec
@@ -66,13 +65,8 @@ class Vec {
   void create(size_type, const T&);
   void create(const_iterator, const_iterator);
 
-  // destroy elements in array, free memory
+  // destroy elemens in array, free memory
   void uncreate();
-
-  // destroy elements in array only
-  void destroy();
-  iterator destroy(iterator);
-  iterator destroy(iterator, iterator);
 
   // support functions for push_back
   void grow();
@@ -135,58 +129,42 @@ void Vec<T>::grow() {
 }
 
 template <class T>
-void Vec<T>::destroy() {
-  if (data) {
-    iterator iter = avail;
-    while (iter != data) {
-      alloc.destroy(--iter);
-    }
+typename Vec<T>::iterator Vec<T>::erase(iterator start) {
+  if (this->empty()) {
+    throw std::domain_error("Vec is empty.");
   }
-  data = avail = 0;
-}
-
-template <class T>
-typename Vec<T>::iterator Vec<T>::destroy(iterator start) {
-  if (data && start != avail) {
-    // save position for return
-    size_type res_posn = start - data;
-
+  size_type res_posn = start - data;
+  alloc.destroy(start);
+  iterator iter = start + 1;
+  while (iter != avail) {
+    alloc.construct(start++, *iter++);
     alloc.destroy(start);
-    iterator iter = start + 1;
-
-    while (iter != avail) {
-      alloc.construct(start++, *iter++);
-      alloc.destroy(start);
-    }
-    avail = start;
-
-    return &data[res_posn];
   }
-  return avail;
+  --avail;
+  return &data[res_posn];
 }
 
 template <class T>
-typename Vec<T>::iterator Vec<T>::destroy(iterator start, iterator end) {
-  if (data && start != avail && start != end) {
-    // save position for return
-    size_type res_posn = start - data;
-
-    // destroy the range
-    iterator iter = start;
-    while (iter != end) {
-      alloc.destroy(iter++);
-    }
-    // copy residual back
-    while (end != avail) {
-      alloc.construct(start++, *end);
-      alloc.destroy(end++);
-    }
-    // reset avail and return dummy res
-    avail = start;
-
-    return &data[res_posn];
+typename Vec<T>::iterator Vec<T>::erase(iterator start, iterator end) {
+  // valid input check
+  if (this->empty()) {
+    throw std::domain_error("Vec is empty.");
   }
-  return avail;
+  // save position for return
+  size_type res_posn = start - data;
+  // destroy the range
+  iterator iter = start;
+  while (iter != end) {
+    alloc.destroy(iter++);
+  }
+  // copy residual back
+  while (iter != avail) {
+    alloc.construct(start++, *iter);
+    alloc.destroy(iter++);
+  }
+  // reset avail and return dummy res
+  avail = start;
+  return &data[res_posn];
 }
 
 template <class T>

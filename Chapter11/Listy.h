@@ -44,7 +44,7 @@ class NodeIterator {
     return clone;
   }
   //TODO: reference operator causing bug - or something else
-  bool operator!=(NodeIterator& rhs) const { return this->iter != rhs.iter; }
+  bool operator!=(NodeIterator rhs) const { return this->iter != rhs.iter; }
   T &operator*() const { return iter->data; }
 
  private:

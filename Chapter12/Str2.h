@@ -88,7 +88,7 @@ std::ostream& operator<<(std::ostream& os, Str& s) {
   return os;
 }
 // + operator: does not change the state of lhs operand
-Str& operator+(const Str& a, const Str& b) {
+Str operator+(const Str& a, const Str& b) {
   Str result = a;
   result += b;
   return result;
