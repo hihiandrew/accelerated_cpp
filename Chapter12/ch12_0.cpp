@@ -23,7 +23,7 @@ int ch12_0() {
   s[3];               // use the index operator to access a character
   s1 + s2;            // use the addition operator to concatenate two strings
 
-  Str name = "Geert";
+  Str name = "Andrew";
   Str greeting = "Hello, " + name + "!";
 
   Str temp1("Hello, ");      // Str::Str(const char*)
@@ -31,6 +31,6 @@ int ch12_0() {
   Str temp3("!");            // Str::Str(const char*)
   greeting = temp2 + temp3;  // operator*(const Str&, const Str&)
 
-  return 0;
+  cout << greeting << endl;
   return 0;
 }

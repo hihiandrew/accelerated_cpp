@@ -142,7 +142,7 @@ void Vec<T>::destroy() {
       alloc.destroy(--iter);
     }
   }
-  data = avail = 0;
+  avail = data;
 }
 
 template <class T>
