@@ -1,5 +1,5 @@
-#ifndef GUARD_Str_h
-#define GUARD_Str_h
+#ifndef GUARD_Str2_h
+#define GUARD_Str2_h
 
 #include <algorithm>  //copy
 #include <cstring>    //strlen
@@ -9,87 +9,137 @@
 
 #include "Vec.h"
 
-class Str {
+class Str2 {
  public:
   // required for write access to data
-  friend std::istream& operator>>(std::istream&, Str&);
+  friend std::istream& operator>>(std::istream&, Str2&);
 
-  typedef Vec<char>::size_type size_type;
+  typedef size_t size_type;
+  typedef char* iterator;
+  typedef const char* const_iterator;
+  typedef char value_type;
+
   // default constructor, empty Str
-  Str() { create(0, '\0'); }
+  Str2() { create(0, '\0'); }
   // Str containing copies of c
-  Str(size_type n, char c) : create(n, c) {}
+  Str2(size_type n, const char c) { create(n, c); }
   // Str from null-terminated array of char
-  Str(const char* cp) {
-    create(cp, cp + std::strlen(cp), std::back_inserter(data));
-  }
+  Str2(const char* cp) { create(cp); }
   // Str from range denoted by iterators
   template <class In>
-  Str(In b, In e) {
-    std::copy(b, e, std::back_inserter(data));
+  Str2(In b, In e) {
+    create(In b, In e);
   }
+  // destructor
+  ~Str2() { uncreate(); }
+  // assignment
+  Str2& operator=(const Str2&);
+  // private access
+  const char* data() const { return d; };
+
   // operators, size
-  size_type size() { return data.size(); }
-  char& operator[](size_type i) { return data[i]; }
-  const char& operator[](size_type i) const { return data[i]; }
-  Str& operator+=(const Str& s) {
-    std::copy(s.data.begin(), s.data.end(), std::back_inserter(data));
+  size_type size() const { return len - 1; }
+  char& operator[](size_type i) { return d[i]; }
+  const char& operator[](size_type i) const { return d[i]; }
+  Str2& operator+=(const char* cp) {
+    append(cp, std::strlen(cp));
     return *this;
   }
+  Str2& operator+=(const Str2& s) {
+    append(s);
+    return *this;
+  }
+
+  // support functions for +=
 
  private:
   // memory management
   std::allocator<char> alloc;
-  void grow();
-  void create();
-  void create(size_type, const char&);
-  void create(const char* cp);
+
+  void Str2::create(size_type n, const char s) {
+    len = n + 1;
+    d = alloc.allocate(len);
+    std::uninitialized_fill(d, d + n, s);
+    d[n] = '\0';
+  }
+
+  void create(const char* cp) { create(cp, cp + std::strlen(cp)); };
   template <class In>
   void create(In b, In e) {
-    size_t length = b - e + 1;
-    data = alloc.allocate(length);
-    limit = avail = std::uninitialized_copy(b, e, data);
-    data[length - 1] = '\0';
-    ++limit, ++avail;
+    len = b - e + 1;
+    data = alloc.allocate(len);
+    std::uninitialized_copy(b, e, data);
+    data[len] = '\0';
   };
-  void uncreate();
 
-  char* data;
-  char* avail;
-  char* limit;
+  void append(const Str2&);
+  void append(const char*, const size_type);
+
+  void uncreate() {
+    if (d) {
+      iterator iter = d + len;
+      while (iter != d) alloc.destroy(--iter);
+      alloc.deallocate(d, len);
+    }
+    len = 0;
+    d[0] = '\0';
+  };
+
+  char* d;
+  size_type len;
 };
 
 // non-member operators operators
-// input/output: implicit binding of lhs operands
-std::istream& operator>>(std::istream& is, Str& s) {
-  // obliterate existing values
-  s.data.clear();
-  // read and discard leading whitespace
-  char c;
-  while (is.get(c) && isspace(c)) {
-    ;  // nothing to do, testing the condition
+
+Str2& Str2::operator=(const Str2& rhs) {
+  if (&rhs != this) {
+    uncreate();
+    create(rhs.data(), rhs.data() + rhs.size());
   }
-  // if something to read, continue until next whitespace
-  if (is) {
-    do
-      s.data.push_back(c);
-    while (is.get(c) && !isspace(c));
-    // if we encounter whitespace, put back on stream
-    if (is) {
-      is.unget();
-    }
-  }
-  return is;
+  return *this;
 }
-std::ostream& operator<<(std::ostream& os, Str& s) {
-  for (Str::size_type i = 0; i < s.size(); ++i) {
+
+void Str2::append(const char* s, const size_type size) {
+  size_type new_size = len + size;
+  iterator new_data = alloc.allocate(new_size);
+  iterator iter_append = std::uninitialized_copy(d, d + len - 1, new_data);
+  std::uninitialized_copy(s, s + size, iter_append);
+  uncreate();
+  d = new_data;
+  len += size;
+  d[len] = '\0';
+}
+void Str2::append(const Str2& s) { append(s.data(), s.size()); }
+// input/output: implicit binding of lhs operands
+// std::istream& operator>>(std::istream& is, Str2& s) {
+//   // obliterate existing values
+//   s.data.clear();
+//   // read and discard leading whitespace
+//   char c;
+//   while (is.get(c) && isspace(c)) {
+//     ;  // nothing to do, testing the condition
+//   }
+//   // if something to read, continue until next whitespace
+//   if (is) {
+//     do
+//       s.data.push_back(c);
+//     while (is.get(c) && !isspace(c));
+//     // if we encounter whitespace, put back on stream
+//     if (is) {
+//       is.unget();
+//     }
+//   }
+//   return is;
+// }
+std::ostream& operator<<(std::ostream& os, Str2& s) {
+  for (Str2::size_type i = 0; i < s.size(); ++i) {
     os << s[i];
   }
   return os;
 }
 // + operator: does not change the state of lhs operand
-Str operator+(const Str& a, const Str& b) {
-  Str result = a;
+Str2 operator+(const Str2& a, const Str2& b) {
+  Str2 result = a;
   result += b;
   return result;
 }
