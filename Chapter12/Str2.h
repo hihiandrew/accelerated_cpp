@@ -63,8 +63,10 @@ class Str2 {
 
   void create(size_type n, const char s) {
     len = n + 1;
-    d = new char[s + 1];
-    memset(d, s, n);
+    d = alloc.allocate(len);
+    std::uninitialized_fill(d, d + n, s);
+    // d = new char[s + 1];
+    // memset(d, s, n);
     d[len - 1] = '\0';
   };
 
@@ -72,8 +74,10 @@ class Str2 {
   template <class In>
   void create(In b, In e) {
     len = e - b + 1;
-    d = new char[len];
-    memcpy(d, b, len - 1);
+    d = alloc.allocate(len);
+    std::uninitialized_copy(b, e, d);
+    // d = new char[len];
+    // memcpy(d, b, len - 1);
     d[len - 1] = '\0';
   }
 
@@ -83,7 +87,10 @@ class Str2 {
 
   void uncreate() {
     if (len != 0) {
-      delete[] d;
+      iterator iter = d + len;
+      while (iter != d) alloc.destroy(--iter);
+      alloc.deallocate(d, len);
+      //delete[] d;
     }
     len = 0;
   };
@@ -94,13 +101,13 @@ class Str2 {
 void Str2::append(char c) { append(&c, 1); }
 void Str2::append(const Str2& s) { append(s.data(), s.size()); }
 void Str2::append(const char* s, const size_type size) {
-  size_type new_size = len + size;
-  iterator new_data = alloc.allocate(new_size);
+  size_type new_len = len + size;
+  iterator new_data = alloc.allocate(new_len);
   iterator iter_append = std::uninitialized_copy(d, d + len - 1, new_data);
   std::uninitialized_copy(s, s + size, iter_append);
   uncreate();
   d = new_data;
-  len += size;
+  len = new_len;
   d[len] = '\0';
 }
 
