@@ -13,6 +13,7 @@ class Str2 {
  public:
   // required for write access to data
   friend std::istream& operator>>(std::istream&, Str2&);
+  friend std::istream& getline(std::istream&, Str2&);
 
   typedef size_t size_type;
   typedef char* iterator;
@@ -38,6 +39,7 @@ class Str2 {
   Str2& operator=(const Str2&);
   // private access
   const char* data() const { return d; };
+  const char* c_str() const { return d; };
   // operators, size
   size_type size() const { return len - 1; }
   char& operator[](size_type i) { return d[i]; }
@@ -50,6 +52,7 @@ class Str2 {
     append(s);
     return *this;
   }
+  size_type copy(char*, size_type) const;
   // returning iterators
   iterator begin() { return d; }
   iterator end() { return d + size(); }
@@ -90,7 +93,7 @@ class Str2 {
       iterator iter = d + len;
       while (iter != d) alloc.destroy(--iter);
       alloc.deallocate(d, len);
-      //delete[] d;
+      // delete[] d;
     }
     len = 0;
   };
@@ -109,6 +112,14 @@ void Str2::append(const char* s, const size_type size) {
   d = new_data;
   len = new_len;
   d[len] = '\0';
+}
+
+Str2::size_type Str2::copy(char* dest, Str2::size_type count)const{
+  Str2::size_type i;
+  for(i=0; i<count && i<size(); i++){
+    dest[i] = d[i];
+  }
+  return i;
 }
 
 Str2& Str2::operator=(const Str2& rhs) {
@@ -136,10 +147,24 @@ std::istream& operator>>(std::istream& is, Str2& s) {
   }
   return is;
 }
+
 std::ostream& operator<<(std::ostream& os, Str2& s) {
   copy(s.begin(), s.end(), std::ostream_iterator<char>(os));
   return os;
 }
+
+std::istream& getline(std::istream& is, Str2& s){
+  s.uncreate();
+  s.create(0,'\0');
+  char c;
+  if(is){
+    while ( is.get(c) && c != '\n'){
+      s.append(c);
+    }
+  }
+  return is;
+}
+
 // + operator: does not change the state of lhs operand
 Str2 operator+(const Str2& a, const Str2& b) {
   Str2 result = a;
@@ -147,4 +172,27 @@ Str2 operator+(const Str2& a, const Str2& b) {
   return result;
 }
 
+inline bool operator==(const Str2& lhs, const Str2& rhs){
+  return strcmp(lhs.c_str(), rhs.c_str()) == 0;
+}
+
+inline bool operator!=(const Str2& lhs, const Str2& rhs){
+  return strcmp(lhs.c_str(), rhs.c_str()) != 0;
+}
+
+inline bool operator<(const Str2& lhs, const Str2& rhs){
+  return strcmp(lhs.c_str(), rhs.c_str()) < 0;
+}
+
+inline bool operator<=(const Str2& lhs, const Str2& rhs){
+  return strcmp(lhs.c_str(), rhs.c_str()) <= 0;
+}
+
+inline bool operator>(const Str2& lhs, const Str2& rhs){
+  return strcmp(lhs.c_str(), rhs.c_str()) > 0;
+}
+
+inline bool operator>=(const Str2& lhs, const Str2& rhs){
+  return strcmp(lhs.c_str(), rhs.c_str()) >= 0;
+}
 #endif

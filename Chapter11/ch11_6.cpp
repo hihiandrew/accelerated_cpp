@@ -20,7 +20,10 @@ int ch11_6() {
   cout << *res2 << endl;
 
   vec.clear();
-  vec.push_back(4);
+  cout << vec.size() << endl;
+  for (int i = 1; i < 11; i++) {
+    vec.push_back(i);
+  }
   vec.print_vec(cout);
 
   return 0;
