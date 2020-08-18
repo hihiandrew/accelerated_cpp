@@ -40,6 +40,10 @@ class Str2 {
   // private access
   const char* data() const { return d; };
   const char* c_str() const { return d; };
+  // handles boolean
+  operator void*() const{
+    return size()>0 ? d : 0;
+  };
   // operators, size
   size_type size() const { return len - 1; }
   char& operator[](size_type i) { return d[i]; }
@@ -167,6 +171,16 @@ std::istream& getline(std::istream& is, Str2& s){
 
 // + operator: does not change the state of lhs operand
 Str2 operator+(const Str2& a, const Str2& b) {
+  Str2 result = a;
+  result += b;
+  return result;
+}
+Str2 operator+(const char* a, const Str2& b){
+  Str2 result = b;
+  result += a;
+  return result;
+}
+Str2 operator+(const Str2& a, const char* b){
   Str2 result = a;
   result += b;
   return result;

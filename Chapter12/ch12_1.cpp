@@ -36,5 +36,19 @@ int ch12_1() {
   greeting = temp2 + temp3;  // operator*(const Str&, const Str&)
 
   cout << greeting << endl;
+
+  if(name){
+    cout << "Boolean check: " << name << endl;
+  }
+  Str2 empty_name;
+  if(empty_name){
+    cout << "Boolean should not print: " << empty_name << endl;
+  }
+
+  Str2 input;
+  cout << "testing for getline(), input few line:" << endl;
+  while (getline(std::cin, input)){
+    cout << input << endl;
+  }
   return 0;
 }
