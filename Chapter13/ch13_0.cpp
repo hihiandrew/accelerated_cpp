@@ -23,13 +23,12 @@ using std::domain_error;
 #include <fstream>
 using std::ifstream;
 
+#include "Student_info.h"
 #include "Core.h"
 #include "Grad.h"
 
 // statically-bound solution, using object params
 // inputs seperated by class
-bool compare(const Core& a, const Core& b) { return a.name() < b.name(); }
-
 int undergrad_only() {
   vector<Core> students;
   Core record;
@@ -73,7 +72,7 @@ int grad_only() {
     students.push_back(record);
   }
   sort(students.begin(), students.end(), compare);
-  for (vector<Core>::size_type i = 0; i != students.size(); ++i) {
+  for (vector<Grad>::size_type i = 0; i != students.size(); ++i) {
     cout << students[i].name()
          << string(maxlen + 1 - students[i].name().size(), ' ');
     try {

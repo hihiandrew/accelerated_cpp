@@ -1,30 +1,47 @@
 #ifndef GUARD_Student_info_h
 #define GUARD_Student_info_h
 
-#include <string>
 #include <iostream>
+#include <string>
 #include <vector>
-#include "grade.h"
-#include "read.h"
 
-class Student_info{
-  public:
-    // constructors
-    Student_info(); // construct an empty Student_info object
-    Student_info(std::istream&); // constructs one by reading from a stream
-    // public member function 
-    std::string name() const {return n;}
-    bool valid() const {return !homework.empty();}
-    double get_grade() const {return finalgrade;}
-    void calc_grade();
-    std::istream& read(std::istream&);
-  private:
-    // private data members
-    std::string n;
-    std::vector<double> homework;
-    double midterm, finalexam, finalgrade;
+#include "Core.h"
+#include "Grad.h"
+
+class Student_info {
+ public:
+  // constructors
+  Student_info() : cp(0){};
+  Student_info(std::istream& is) : cp(0){read(is);};
+  Student_info(const Student_info& rhs) : cp(0) {
+    if (rhs.cp) cp = rhs.cp->clone();
+  };
+  // destructor
+  ~Student_info() { delete cp; }
+  // operators
+  Student_info& operator=(const Student_info&);
+  // utility
+  std::istream& read(std::istream&);
+  std::string name() {
+    if (cp)
+      return cp->name();
+    else
+      throw std::runtime_error("uninitialised Student");
+  }
+  double grade() const {
+    if (cp)
+      return cp->grade();
+    else
+      throw std::runtime_error("uninitialized Student");
+  }
+  static bool compare(const Student_info& a, const Student_info& b) {
+    return a.cp->name() < b.cp->name();
+  }
+
+ private:
+  Core* cp;
 };
 
-bool compare(const Student_info&, const Student_info&);
+
 
 #endif
