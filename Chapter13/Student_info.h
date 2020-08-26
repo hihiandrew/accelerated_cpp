@@ -12,7 +12,7 @@ class Student_info {
  public:
   // constructors
   Student_info() : cp(0){};
-  Student_info(std::istream& is) : cp(0){read(is);};
+  Student_info(std::istream& is) : cp(0) { read(is); };
   Student_info(const Student_info& rhs) : cp(0) {
     if (rhs.cp) cp = rhs.cp->clone();
   };
@@ -22,7 +22,7 @@ class Student_info {
   Student_info& operator=(const Student_info&);
   // utility
   std::istream& read(std::istream&);
-  std::string name() {
+  std::string name() const {
     if (cp)
       return cp->name();
     else
@@ -32,16 +32,14 @@ class Student_info {
     if (cp)
       return cp->grade();
     else
-      throw std::runtime_error("uninitialized Student");
+      throw std::runtime_error("uninitialised Student");
   }
   static bool compare(const Student_info& a, const Student_info& b) {
-    return a.cp->name() < b.cp->name();
+    return a.name() < b.name();
   }
 
  private:
   Core* cp;
 };
-
-
 
 #endif

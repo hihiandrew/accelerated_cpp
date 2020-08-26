@@ -21,9 +21,7 @@ std::istream& Student_info::read(std::istream& is) {
   is >> ch;
   if (ch == 'U')
     cp = new Core(is);
-  else if (ch == 'G')
-    cp = new Grad(is);
   else
-    throw;
+    cp = new Grad(is);
   return is;
 }
