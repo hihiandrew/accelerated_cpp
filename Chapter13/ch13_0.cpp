@@ -103,6 +103,7 @@ int mixed_grades() {
   while (record.read(infile)) {
     maxlen = max(maxlen, record.name().size());
     students.push_back(record);
+    cout << record.name() << endl;
   }
 
   sort(students.begin(), students.end(), Student_info::compare);
@@ -110,11 +111,13 @@ int mixed_grades() {
   for (vector<Student_info>::size_type i = 0; i < students.size(); ++i) {
     cout << students[i].name()
          << string(maxlen + 1 - students[i].name().size(), ' ');
-    if(students[i].valid()){
+    if (students[i].valid()) {
       double final_grade = students[i].grade();
       streamsize prec = cout.precision();
-      cout << setprecision(3) << final_grade << setprecision(prec) << endl;
-    }else{
+      cout << setprecision(3) << final_grade << " "
+           << students[i].letter_grade(final_grade) << setprecision(prec)
+           << endl;
+    } else {
       cout << "No homework submitted." << endl;
     }
   }
@@ -122,8 +125,8 @@ int mixed_grades() {
 }
 
 int ch13_0() {
-  grad_only();
-  undergrad_only();
+  //grad_only();
+  //undergrad_only();
   mixed_grades();
   return 0;
 }

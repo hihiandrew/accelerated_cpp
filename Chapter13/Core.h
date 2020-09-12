@@ -21,6 +21,7 @@ class Core {
   virtual std::string name() const { return n; };
   virtual double grade() const { return ::grade(midterm, final, homework); };
   virtual std::istream& read(std::istream&);
+  virtual bool complete() const { return !homework.empty(); };
 
  protected:
   // handle class assignment/copy requires clone functionality

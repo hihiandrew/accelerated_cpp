@@ -22,6 +22,7 @@ class Student_info {
   Student_info& operator=(const Student_info&);
   // utility
   bool valid() const { return !cp->homework.empty(); }
+  bool complete();
   std::istream& read(std::istream&);
   std::string name() const {
     if (cp)
@@ -35,6 +36,7 @@ class Student_info {
     else
       throw std::runtime_error("uninitialised Student");
   }
+  std::string letter_grade(double grade);
   static bool compare(const Student_info& a, const Student_info& b) {
     return a.name() < b.name();
   }

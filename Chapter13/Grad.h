@@ -1,10 +1,11 @@
 #ifndef GUARD_Grad_h
 #define GUARD_Grad_h
 
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
+
 #include "Core.h"
 class Grad : public Core {
  public:
@@ -15,6 +16,8 @@ class Grad : public Core {
   // accessors
   double grade() const override;
   std::istream& read(std::istream&) override;
+  std::istream& read_thesis(std::istream& is);
+  bool complete() const override { return !homework.empty() && thesis >= 0.0; }
 
  protected:
   // handle class assignment/copy requires clone functionality
