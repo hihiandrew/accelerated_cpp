@@ -21,6 +21,7 @@ class Student_info {
   // operators
   Student_info& operator=(const Student_info&);
   // utility
+  bool valid() const { return !cp->homework.empty(); }
   std::istream& read(std::istream&);
   std::string name() const {
     if (cp)

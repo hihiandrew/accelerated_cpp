@@ -30,8 +30,8 @@ using std::ifstream;
 // statically-bound solution, using object params
 // inputs seperated by class
 int undergrad_only() {
-  vector<Core> students;
-  Core record;
+  vector<Core> students{};
+  Core record{};
   string::size_type maxlen = 0;
 
   cout << "Testing statically bound class Undergrad only." << '\n'
@@ -110,12 +110,12 @@ int mixed_grades() {
   for (vector<Student_info>::size_type i = 0; i < students.size(); ++i) {
     cout << students[i].name()
          << string(maxlen + 1 - students[i].name().size(), ' ');
-    try {
+    if(students[i].valid()){
       double final_grade = students[i].grade();
       streamsize prec = cout.precision();
       cout << setprecision(3) << final_grade << setprecision(prec) << endl;
-    } catch (domain_error& e) {
-      cout << e.what() << endl;
+    }else{
+      cout << "No homework submitted." << endl;
     }
   }
   return 0;
