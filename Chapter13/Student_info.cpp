@@ -4,6 +4,11 @@
 #include <string>
 #include <vector>
 
+#include "Audit.h"
+#include "Core.h"
+#include "Credit.h"
+#include "Grad.h"
+
 Student_info& Student_info::operator=(const Student_info& rhs) {
   if (&rhs != this) {
     delete cp;
@@ -19,10 +24,18 @@ std::istream& Student_info::read(std::istream& is) {
   delete cp;
   char ch;
   is >> ch;
-  if (ch == 'U'){
-    cp = new Core(is);
-  }else{
-    cp = new Grad(is);
+  switch (ch) {
+    case 'G':
+      cp = new Grad(is);
+      break;
+    case 'C':
+      cp = new Credit(is);
+      break;
+    case 'A':
+      cp = new Audit(is);
+      break;
+    default:
+      cp = new Core(is);
   }
   return is;
 }

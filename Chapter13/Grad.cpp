@@ -8,6 +8,7 @@
 #include "Core.h"
 
 double Grad::grade() const { return std::min(thesis, Core::grade()); }
+
 std::istream& Grad::read(std::istream& is) {
   read_common(is);
   read_thesis(is);

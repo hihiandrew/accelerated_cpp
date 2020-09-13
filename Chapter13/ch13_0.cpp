@@ -111,14 +111,47 @@ int mixed_grades() {
   for (vector<Student_info>::size_type i = 0; i < students.size(); ++i) {
     cout << students[i].name()
          << string(maxlen + 1 - students[i].name().size(), ' ');
-    if (students[i].valid()) {
+    if (students[i].complete()) {
       double final_grade = students[i].grade();
       streamsize prec = cout.precision();
       cout << setprecision(3) << final_grade << " "
            << students[i].letter_grade(final_grade) << setprecision(prec)
            << endl;
     } else {
-      cout << "No homework submitted." << endl;
+      cout << "Did not meet requirements." << endl;
+    }
+  }
+  return 0;
+}
+
+int multi_mixed_students(){
+  string filename = "students_10_mixed2.txt";
+  cout << "Testing multiple mixed student input. \n File: " << filename << endl;
+  ifstream infile;
+  infile.open(filename);
+
+  vector<Student_info> students;
+  Student_info record;
+  string::size_type maxlen = 0;
+
+  while (record.read(infile)) {
+    maxlen = max(maxlen, record.name().size());
+    students.push_back(record);
+  }
+
+  sort(students.begin(), students.end(), Student_info::compare);
+
+  for (vector<Student_info>::size_type i = 0; i < students.size(); ++i) {
+    cout << students[i].name()
+         << string(maxlen + 1 - students[i].name().size(), ' ');
+    if (students[i].complete()) {
+      double final_grade = students[i].grade();
+      streamsize prec = cout.precision();
+      cout << setprecision(3) << final_grade << " "
+           << students[i].letter_grade(final_grade) << setprecision(prec)
+           << endl;
+    } else {
+      cout << "Did not meet requirements." << endl;
     }
   }
   return 0;
@@ -128,5 +161,6 @@ int ch13_0() {
   //grad_only();
   //undergrad_only();
   mixed_grades();
+  multi_mixed_students();
   return 0;
 }

@@ -6,7 +6,6 @@
 #include <vector>
 
 #include "Core.h"
-#include "Grad.h"
 
 class Student_info {
  public:
