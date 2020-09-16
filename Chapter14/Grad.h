@@ -17,7 +17,7 @@ class Grad : public Core {
   double grade() const override;
   std::istream& read(std::istream&) override;
   std::istream& read_thesis(std::istream& is);
-  bool complete() const override { return Grad::complete() && thesis >= 0.0; }
+  bool complete() const override { return Core::complete() && thesis >= 0.0; }
 
  protected:
   // handle class assignment/copy requires clone functionality
