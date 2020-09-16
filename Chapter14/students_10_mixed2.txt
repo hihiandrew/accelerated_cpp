@@ -1,0 +1,14 @@
+U Andrew_mixed 50 80 90 45 30 80
+U Devi 40 50 30 0 50 50 40
+U Caio 40 80 90 45 60 70
+U Bodhi 30 20 80 40 50 30 0
+U Connie 80 90 60 70 60 70 60
+A Juanpa 78 98 77 89 67
+A Mel 99 89 89 97 99
+C Roger 4 56 6 7
+C Sue 20 10 
+U Ron 50 80
+G Jessica 40 50 0 
+G Bianca 40 80 90 45 60 70
+G Juergen 30 20 80 0 50 30 40
+G Pete 80 90 60 70 60 70 60
