@@ -1,9 +1,9 @@
-﻿# CMakeList.txt : Top-level CMake project file, do global configuration
-# and include sub-projects here.
+﻿# CMakeList.txt : CMake project for Chapter7, include source and define
+# project specific logic here.
 #
 cmake_minimum_required (VERSION 3.8)
 
-project ("Chapter7")
+# Add source to this project's executable.
+add_executable (Chapter7 "Chapter7.cpp" "Chapter7.h" "ch7_0.cpp" "ch7_0.h" "ch7_0b.cpp" "ch7_0b.h" "split.cpp" "split.h" "ch7_3.cpp" "ch7_3.h" "loaders.cpp" "nrand.cpp" "nrand.h" "loaders.h" "xref.cpp" "xref.h")
 
-# Include sub-projects.
-add_subdirectory ("Chapter7")
+# TODO: Add tests and install targets if needed.

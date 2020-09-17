@@ -1,9 +1,0 @@
-# ninja log v5
-4	209	614937806	CMakeFiles/Chapter5.dir/median.cpp.obj	4d7010a1b0779246
-6	211	614937806	CMakeFiles/Chapter5.dir/grade.cpp.obj	a81fe3742dbb3c
-3	317	614937806	CMakeFiles/Chapter5.dir/Chapter5.cpp.obj	a3335eb368a1c3c3
-13	330	614937806	CMakeFiles/Chapter5.dir/timer.cpp.obj	33de8b5fcf6cb767
-0	338	614937806	CMakeFiles/Chapter5.dir/ch5_0.cpp.obj	6d1e53f1680ad200
-9	373	614937807	CMakeFiles/Chapter5.dir/read.cpp.obj	c8c6cbc29d75cff0
-11	415	614937807	CMakeFiles/Chapter5.dir/ch5_2.cpp.obj	755f634b0b001238
-415	638	614937807	Chapter5.exe	29aa3ba2a5fbf2cf
